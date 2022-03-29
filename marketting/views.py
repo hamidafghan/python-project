@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from matplotlib.font_manager import json_dump
 from marketting.models import Note
 
 # Create your views here.
@@ -9,9 +10,7 @@ def welcome(request):
 
     # get all the notes and send it to welcome page
     notes = Note.objects.all()
-    for note in notes:
-        print(note.name)
-        print(note.id)
+    return json_dump(notes)
 
     return render(request, 'welcome.html', {
         "name": "My todo list application"
