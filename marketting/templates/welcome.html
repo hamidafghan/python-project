@@ -10,6 +10,11 @@
 
 <body>
     <p>Welcome to {{ name }}</p>
+    <!-- foreach the notes -->
+    {% for note in notes %}
+    <p>{{ note.name }}</p>
+    <p>{{ note.decription }}</p>
+    {% endfor %}
 </body>
 
 </html>

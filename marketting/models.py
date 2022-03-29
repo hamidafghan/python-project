@@ -9,3 +9,4 @@ class Note(models.Model):
 class Card(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
+    comment = models.CharField(max_length=200, null=True)

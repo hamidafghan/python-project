@@ -10,10 +10,10 @@ def welcome(request):
 
     # get all the notes and send it to welcome page
     notes = Note.objects.all()
-    return json_dump(notes)
 
-    return render(request, 'welcome.html', {
-        "name": "My todo list application"
+    return render(request, 'welcome.html', context={
+        "notes": list(notes),
+        "name": "My todo list"
     })
 
 
@@ -28,4 +28,44 @@ def contact_us(request):
 def year(request, year=2022):
     return render(request, 'year.html', {
         "year": year
+    })
+
+def update(request, id):
+
+    # update a note
+    note = Note.objects.get(id=id)
+    note.name = "Updated Title"
+    note.save()
+
+    notes = Note.objects.all()
+
+    return render(request, 'welcome.html', context={
+        "notes": list(notes),
+        "name": "My todo list"
+    })
+
+def delete(request, id):
+
+    # delete a note
+    note = Note.objects.get(id=id)
+    note.delete()
+
+    notes = Note.objects.all()
+
+    return render(request, 'welcome.html', context={
+        "notes": list(notes),
+        "name": "My todo list"
+    })
+
+def create(request):
+
+    # create a note
+    note = Note(name="A name", decription="some text here")
+    note.save()
+
+    notes = Note.objects.all()
+
+    return render(request, 'welcome.html', context={
+        "notes": list(notes),
+        "name": "My todo list"
     })
