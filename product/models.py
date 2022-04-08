@@ -14,6 +14,12 @@ class Customer(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    def full_name(self) -> dict:
+        return {
+            "name": self.name,
+            "phone": self.phone
+        }
+
 class Tag(models.Model):
     name = models.CharField(max_length=200, null=True)
 
@@ -41,6 +47,7 @@ class Order(models.Model):
 			('Pending', 'Pending'),
 			('Out for delivery', 'Out for delivery'),
 			('Delivered', 'Delivered'),
+            ('Out of stuck', 'Out of stuck')
 			)
 
     customer = models.ForeignKey(Customer, null=True, on_delete= models.SET_NULL)
@@ -48,3 +55,9 @@ class Order(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     status = models.CharField(max_length=200, null=True, choices=STATUS)
 
+    def __str__(self) -> str:
+        return self.customer.name
+
+class Discount(models.Model):
+    product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
+    percentage = models.IntegerField(default=0)
