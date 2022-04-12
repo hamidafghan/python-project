@@ -1,0 +1,36 @@
+{% extends 'layout/main.html' %}
+
+{% block content %}
+<p>This is the customer page</p>
+<a href="{% url 'customers.create' %}">Create a new customer</a>
+<div class="p-10">
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Orders</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+            <tr>
+                <td>{{ customer.id }}</td>
+                <td>
+                    <a href="{% url 'customers.show' customer.id %}">
+                        {{ customer.name }}
+                    </a>
+                </td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.email }}</td>
+                <td>
+                    {{ customer.order_set.count }} orders
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

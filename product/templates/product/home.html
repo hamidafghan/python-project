@@ -1,0 +1,91 @@
+{% extends 'layout/main.html' %}
+
+{% block content %}
+<p>Welcome to dashboard of the nice thing</p>
+
+<h1>Customers: {{ customer_count }}</h1>
+<h1>Orders: {{ order_count }}</h1>
+<h1>Product: {{ product_count }}</h1>
+
+<hr>
+<h1>5 Latest <a href="{% url 'customers' %}">customers</a> </h1>
+<div class="p-10">
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Orders</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+            <tr>
+                <td>{{ customer.id }}</td>
+                <td>
+                    <a href="{% url 'customers.show' customer.id %}">
+                        {{ customer.name }}
+                    </a>
+                </td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.email }}</td>
+                <td>
+                    {{ customer.order_set.count }} orders
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<hr>
+<h1>5 Latest <a href="{% url 'orders' %}">orders</a></h1>
+<div class="p-10">
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.customer }}</td>
+                <td>{{ order.product }}</td>
+                <td>{{ order.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<hr>
+<h1>5 Latest <a href="{% url 'products' %}">products</a></h1>
+<div class="p-10">
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.category }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

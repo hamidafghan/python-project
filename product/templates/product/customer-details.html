@@ -1,0 +1,31 @@
+{% extends 'layout/main.html' %}
+
+{% block content %}
+<p>This is the customer details page</p>
+<p>Name: {{ customer.name }}</p>
+<p>Email: {{ customer.email }}</p>
+
+<h1>Ordes</h1>
+
+<div class="p-10">
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Product</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.product }}</td>
+                <td>{{ order.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

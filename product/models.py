@@ -5,6 +5,7 @@ from numpy import product
 
 # Create your models here.
 
+
 class Customer(models.Model):
     name = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
@@ -20,17 +21,19 @@ class Customer(models.Model):
             "phone": self.phone
         }
 
+
 class Tag(models.Model):
     name = models.CharField(max_length=200, null=True)
 
     def __str__(self) -> str:
         return self.name
 
+
 class Product(models.Model):
     CATEGORY = (
-			('Indoor', 'Indoor'),
-			('Out Door', 'Out Door'),
-			) 
+        ('Indoor', 'Indoor'),
+        ('Out Door', 'Out Door'),
+    )
 
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField(null=True)
@@ -42,21 +45,25 @@ class Product(models.Model):
     def __str__(self) -> str:
         return self.name
 
+
 class Order(models.Model):
     STATUS = (
-			('Pending', 'Pending'),
-			('Out for delivery', 'Out for delivery'),
-			('Delivered', 'Delivered'),
-            ('Out of stuck', 'Out of stuck')
-			)
+        ('Pending', 'Pending'),
+        ('Out for delivery', 'Out for delivery'),
+        ('Delivered', 'Delivered'),
+        ('Out of stuck', 'Out of stuck')
+    )
 
-    customer = models.ForeignKey(Customer, null=True, on_delete= models.SET_NULL)
-    product = models.ForeignKey(Product, null=True, on_delete= models.SET_NULL)
+    customer = models.ForeignKey(
+        Customer, null=True, on_delete=models.SET_NULL)
+    product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
+    quantity = models.IntegerField(default=0)
     status = models.CharField(max_length=200, null=True, choices=STATUS)
 
     def __str__(self) -> str:
         return self.customer.name
+
 
 class Discount(models.Model):
     product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
