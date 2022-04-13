@@ -63,6 +63,33 @@ def customer_create(request):
     return render(request, 'product/customer-create.html', context)
 
 
+def customer_edit(request, id):
+    customer = Customer.objects.get(id=id)
+    form = CustomerForm(instance=customer)
+
+    # update the customer
+    if request.method == "POST":
+        form = CustomerForm(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            return redirect('/dashboard/customers/'+str(customer.id))
+
+    context = {'form': form}
+    return render(request, 'product/customer-edit.html', context)
+
+
+def customer_delete(request, id):
+    customer = Customer.objects.get(id=id)
+
+    if request.method == "POST":
+        customer.delete()
+        return redirect('/dashboard/customers')
+
+    context = {'customer': customer}
+
+    return render(request, 'product/customer-delete.html', context)
+
+
 def orders(request):
     orders = Order.objects.all()
 

@@ -12,6 +12,7 @@
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Orders</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,10 @@
                 <td>{{ customer.email }}</td>
                 <td>
                     {{ customer.order_set.count }} orders
+                </td>
+                <td>
+                    <a href="{% url 'customers.edit' customer.id  %}"> Edit </a>
+                    <a href="{% url 'customers.delete' customer.id  %}"> Delete </a>
                 </td>
             </tr>
             {% endfor %}

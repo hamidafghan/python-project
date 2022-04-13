@@ -1,0 +1,17 @@
+{% extends 'layout/main.html' %}
+
+{% block content %}
+<p>This is the customer details page</p>
+<p>Name: {{ customer.name }}</p>
+<p>Email: {{ customer.email }}</p>
+
+<p>Are you sure the delete the customer?</p>
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" name="submit" onclick="confirm('are you sure')" value="Delete">
+</form>
+
+<a href="{% url 'customers' %}">cancel</a>
+
+
+{% endblock %}

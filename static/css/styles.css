@@ -2194,6 +2194,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   content: var(--tw-content);
 }
 
+input{
+  border-width: 1px;
+}
+
 .content-\[\'this-is-also-valid\]-weirdly-enough\'\] {
   --tw-content: 'this-is-also-valid]-weirdly-enough';
   content: var(--tw-content);
