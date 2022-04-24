@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from product.models import Product, Customer, Order
 from .forms import CustomerForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 
+@login_required
 def home(request):
     order_count = Order.objects.count()
     customer_count = Customer.objects.count()
